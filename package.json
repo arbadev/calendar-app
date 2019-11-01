@@ -1,0 +1,9 @@
+{
+  "name": "calendar-app",
+  "version": "1.0.0",
+  "description": "Base calendar app",
+  "main": "index.js",
+  "repository": "git@github.com:arbadev/calendar-app.git",
+  "author": "<a3barradas@gmail.com>",
+  "license": "MIT"
+}

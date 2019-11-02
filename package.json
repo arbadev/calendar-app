@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-plugin-root-import": "^6.4.1",
     "calendar": "^0.1.0",
     "react": "^16.11.0",
+    "react-app-rewired": "^2.1.4",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
     "react-use-calendar": "^1.0.0"
@@ -40,7 +42,6 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "install-peerdeps": "^1.10.2",
     "node-sass": "^4.13.0",
-    "normalize-scss": "^7.0.1",
-    "prettier": "^1.18.2"
+    "normalize-scss": "^7.0.1"
   }
 }

@@ -1,17 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import React from 'react'
+
+import Calendar from './components/Calendar'
+
+import './App.scss'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>
-          My Amazing Calendar
-        </h1>
-      </header>
-    </div>
-  );
+    <>
+      <Calendar />
+    </>
+  )
 }
 
-export default App;
+export default App

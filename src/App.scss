@@ -1,0 +1,26 @@
+@import 'styles/colors';
+
+.App {
+  text-align: center;
+  display: grid;
+
+
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: $background;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}

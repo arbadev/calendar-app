@@ -1,9 +1,48 @@
 {
-  "name": "calendar-app",
-  "version": "1.0.0",
-  "description": "Base calendar app",
-  "main": "index.js",
-  "repository": "git@github.com:arbadev/calendar-app.git",
-  "author": "<a3barradas@gmail.com>",
-  "license": "MIT"
+  "name": "calendar",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "babel-plugin-root-import": "^6.4.1",
+    "calendar": "^0.1.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-app-rewired": "^2.1.4",
+    "react-dom": "^16.11.0",
+    "react-scripts": "3.2.0",
+    "react-use-calendar": "^1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "install-peerdeps": "^1.10.2",
+    "node-sass": "^4.13.0",
+    "normalize-scss": "^7.0.1"
+  }
 }

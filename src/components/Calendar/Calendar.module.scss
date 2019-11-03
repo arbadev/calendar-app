@@ -1,0 +1,65 @@
+@import "styles/colors";
+
+.calendar {
+    width: 130rem;
+    width: 120rem;
+    display: grid;
+    grid-template-rows: 2fr 1fr repeat(6, 2.5fr);
+    grid-template-columns: repeat(7, 1fr);
+
+    // grid-gap: 3rem;
+    grid-template-areas: "head head head head head head head" "week week week week week week week" "days days days days days days days" "days days days days days days days" "days days days days days days days" "days days days days days days days" "days days days days days days days" "days days days days days days days";
+}
+
+.header {
+    grid-area: head;
+    background-color: $alter-grey;
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary;
+
+    &__date {
+        width: 20rem;
+    }
+
+    &__actions {
+        width: 15rem;
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+.week {
+    grid-area: week;
+    background-color: $alter-grey;
+    color: white;
+    font-size: 2rem;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(7, 1fr);
+
+    &__day {
+        text-align: left;
+    }
+}
+
+.days {
+    grid-area: days;
+    background-color: $alter-red;
+    color: white;
+    font-size: 2rem;
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.actionButton {
+    height: 3rem;
+    width: 3rem;
+    background-color: transparent;
+    border: 1px solid $alter-red;
+}

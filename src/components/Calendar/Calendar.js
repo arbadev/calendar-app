@@ -64,88 +64,10 @@ const Calendar = (props) => {
         ))}
       </div>
       <div className={styles.days}>
-        {state.weeks.map((week) => week.map((day) => <CalendarDay day={day} />))}
+        {state.weeks.map((week) => week.map((day) => <CalendarDay day={day} key={day.dayOfYear} />))}
       </div>
     </div>
   );
 };
 
 export default Calendar;
-
-/*
-
-   <table>
-        <thead>
-          <tr>
-            <td
-              colSpan={5}
-              style={{
-                textAlign: 'center',
-              }}
-            >
-              <strong>
-                {' '}
-                {state.month}
-                {' '}
--
-                {state.year}
-                {' '}
-              </strong>
-              {' '}
-            </td>
-            {' '}
-            <td
-              colSpan={2}
-              style={{
-                textAlign: 'right',
-              }}
-            >
-              <button onClick={() => actions.getPrevMonth()}>{'<'}</button>
-              <button onClick={() => actions.setDate(new Date())}> today </button>
-              <button onClick={() => actions.getNextMonth()}>{'>'}</button>
-              {' '}
-            </td>
-            {' '}
-          </tr>
-          {' '}
-          <tr>
-            {' '}
-            {state.days.map((day) => (
-              <th key={day}>
-                {' '}
-                {day}
-                {' '}
-              </th>
-            ))}
-            {' '}
-          </tr>
-          {' '}
-        </thead>
-        {' '}
-        <tbody>
-          {' '}
-          {state.weeks.map((week, index) => (
-            <tr key={index}>
-              {' '}
-              {week.map((day) => (
-                <td
-                  key={day.dayOfMonth}
-                  style={{
-                    textAlign: 'center',
-                    backgroundColor: day.isToday ? '#ff0' : '#fff',
-                  }}
-                >
-                  {' '}
-                  {day.dayOfMonth}
-                  {' '}
-                </td>
-              ))}
-              {' '}
-            </tr>
-          ))}
-          {' '}
-        </tbody>
-        {' '}
-      </table>
-      {' '}
-*/

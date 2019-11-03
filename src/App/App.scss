@@ -1,23 +1,11 @@
-@import 'styles/colors';
+@import "styles/colors";
 
 .App {
-  text-align: center;
-  display: grid;
-
-
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: $background;
 }
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: $background;
-  height: 7vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: white;
-}
-

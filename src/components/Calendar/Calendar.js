@@ -23,15 +23,32 @@ const Calendar = (props) => {
     ],
   });
 
-  const getMonthYearLabel = (s) => `${s.month.toUpperCase()}  ${s.year}`;
+  const getMonthYearLabel = (s) => (
+    <div>
+      <h1 className={styles.header__date}>
+        <span>{s.month}</span>
+        {' '}
+        {s.year}
+      </h1>
+    </div>
+  );
 
   console.log('STATE', state);
   console.log('ACTIONS', actions);
 
+  useEffect(() => {
+    actions.addEvent({
+      startDate: new Date(),
+      endDate: new Date(),
+      note: 'string string string string',
+      label: '#ca3e47',
+    });
+  }, []);
+
   return (
     <div className={styles.calendar}>
       <div className={styles.header}>
-        <div className={styles.header__date}>{getMonthYearLabel(state)}</div>
+        <>{getMonthYearLabel(state)}</>
         <div className={styles.header__actions}>
           <button
             type="button"

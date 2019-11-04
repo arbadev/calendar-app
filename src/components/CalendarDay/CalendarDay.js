@@ -1,17 +1,61 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Modal from 'react-modal';
 
+import { ReactComponent as List } from '../../assets/img/view_list.svg';
 import EventItem from '../EventCalendarItem';
+import Reminders from '../Reminders';
 
 import styles from './CalendarDay.module.scss';
 
 const RENDER_ROWS = 2;
 
+const BASE_MODAL_STYLES = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '0',
+    display: 'flex',
+    flexFlow: 'column wrap',
+    border: 'none',
+  },
+  overlay: {
+    zIndex: 10,
+    background: 'rgba(50, 50, 50, 0.5)',
+  },
+};
+
+Modal.setAppElement('body');
+
 const CalendarDay = ({ day }) => {
   const {
     dayOfMonth, isToday, isSameMonth, isWeekend,
   } = day;
+
+  const [open, setOpen] = useState(false);
+  // useEffect(() => {
+  // });
+
+  useEffect(() => {
+    console.log(open);
+  }, [open]);
+
+  const openModal = () => {
+    setOpen(true);
+  };
+
+  const closeModal = () => {
+    console.log('HEETRETET');
+
+    setOpen(false);
+  };
+
   const events = [
     {
       id: 2,
@@ -48,7 +92,6 @@ const CalendarDay = ({ day }) => {
   ];
 
   const boxClass = classNames(styles.calendarDay, { [styles.calendarDayWeekend]: isWeekend });
-
   const dayClass = classNames(
     styles.calendarDay__day,
     { [styles.calendarDay__dayToday]: isToday },
@@ -58,6 +101,9 @@ const CalendarDay = ({ day }) => {
   return (
     <div className={boxClass}>
       <div className={styles.calendarDay__dayContent}>
+        <button type="button" className={styles.actionButton} onClick={openModal}>
+          <List />
+        </button>
         <p className={dayClass}>{dayOfMonth}</p>
       </div>
       <div className={styles.calendarDay__events}>
@@ -73,6 +119,10 @@ const CalendarDay = ({ day }) => {
 more ...
         </p>
       </div>
+
+      <Modal isOpen={open} onRequestClose={closeModal} style={BASE_MODAL_STYLES}>
+        <Reminders events={events} />
+      </Modal>
     </div>
   );
 };

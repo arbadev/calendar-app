@@ -8956,7 +8956,13 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
 
-uuid@^3.0.1, uuid@^3.3.2:
+uuid-token-generator@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/uuid-token-generator/-/uuid-token-generator-1.0.0.tgz#36db091f66b94c93f0adc248568fa473711637db"
+  dependencies:
+    uuid "^3.0.0"
+
+uuid@^3.0.0, uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
 

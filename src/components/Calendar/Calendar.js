@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useCalendar from 'react-use-calendar';
+import TokenGenerator from 'uuid-token-generator';
+
 import { ReactComponent as RightChevron } from '../../assets/img/keyboard_arrow_right.svg';
 import { ReactComponent as LeftChevron } from '../../assets/img/keyboard_arrow_left.svg';
 import { ReactComponent as Today } from '../../assets/img/today.svg';
@@ -7,17 +9,19 @@ import CalendarDay from '../CalendarDay';
 
 import styles from './Calendar.module.scss';
 
-const Calendar = (props) => {
+const tokgen = new TokenGenerator();
+
+const Calendar = () => {
   const [state, actions] = useCalendar(null, {
     events: [
       {
-        startDate: new Date(2019, 1, 27),
-        endDate: new Date(2019, 1, 27),
+        startDate: new Date(),
+        endDate: new Date(),
         note: 'Meeting with clients',
       },
       {
-        startDate: new Date(2019, 1, 22),
-        endDate: new Date(2019, 1, 25),
+        startDate: new Date(),
+        endDate: new Date(),
         note: 'Vacation',
       },
     ],
@@ -35,15 +39,6 @@ const Calendar = (props) => {
 
   console.log('STATE', state);
   console.log('ACTIONS', actions);
-
-  useEffect(() => {
-    actions.addEvent({
-      startDate: new Date(),
-      endDate: new Date(),
-      note: 'string string string string',
-      label: '#ca3e47',
-    });
-  }, []);
 
   return (
     <div className={styles.calendar}>
@@ -81,7 +76,7 @@ const Calendar = (props) => {
         ))}
       </div>
       <div className={styles.days}>
-        {state.weeks.map((week) => week.map((day) => <CalendarDay day={day} key={day.dayOfYear} />))}
+        {state.weeks.map((week) => week.map((day) => <CalendarDay day={day} key={tokgen.generate()} />))}
       </div>
     </div>
   );

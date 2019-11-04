@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Modal from 'react-modal';
 
-import { ReactComponent as List } from '../../assets/img/view_list.svg';
+import { ReactComponent as Today } from '../../assets/img/today.svg';
+
 import EventItem from '../EventCalendarItem';
 import Reminders from '../Reminders';
 
@@ -102,7 +103,7 @@ const CalendarDay = ({ day }) => {
     <div className={boxClass}>
       <div className={styles.calendarDay__dayContent}>
         <button type="button" className={styles.actionButton} onClick={openModal}>
-          <List />
+          <Today />
         </button>
         <p className={dayClass}>{dayOfMonth}</p>
       </div>

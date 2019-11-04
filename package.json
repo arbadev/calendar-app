@@ -12,7 +12,8 @@
     "react-dom": "^16.11.0",
     "react-modal": "^3.11.1",
     "react-scripts": "3.2.0",
-    "react-use-calendar": "^1.0.0"
+    "react-use-calendar": "^1.0.0",
+    "uuid-token-generator": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,7 +46,6 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "install-peerdeps": "^1.10.2",
     "node-sass": "^4.13.0",
-    "normalize-scss": "^7.0.1",
-    "uuid-token-generator": "^1.0.0"
+    "normalize-scss": "^7.0.1"
   }
 }

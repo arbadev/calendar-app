@@ -1,28 +1,33 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-shadow */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import chroma from 'chroma-js';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
+import moment from 'moment';
 
+import { CalendarContext } from '../../Providers/CalendarContext';
 import useReminderForm from '../../hooks/useReminderForm';
 import EventReminderItem from '../EventReminderItem';
 import ActionButton from '../../Atoms/ActionButton';
 import { ReactComponent as Add } from '../../assets/img/add.svg';
 import { ReactComponent as DeleteAll } from '../../assets/img/delete_all.svg';
+import cities from '../../assets/cities.json';
 
 import styles from './Reminders.module.scss';
 
-const options = [
-  { label: 'one', value: '#f3a683', color: '#f3a683' },
-  { label: 'two', value: '#f7d794', color: '#f7d794' },
-  { label: 'three', value: '#778beb', color: '#778beb' },
-  { label: 'four', value: '#e77f67', color: '#e77f67' },
-  { label: 'five', value: '#cf6a87', color: '#cf6a87' },
-  { label: 'six', value: '#63cdda', color: '#63cdda' },
+const colorOptions = [
+  { label: 'Orange', value: '#f3a683', color: '#f3a683' },
+  { label: 'Yellow', value: '#f7d794', color: '#f7d794' },
+  { label: 'Blue', value: '#778beb', color: '#778beb' },
+  { label: 'Orangered', value: '#e77f67', color: '#e77f67' },
+  { label: 'Red', value: '#cf6a87', color: '#cf6a87' },
+  { label: 'Cyan', value: '#63cdda', color: '#63cdda' },
 ];
+
+const computedCitiesOptions = cities.map((c) => ({ value: c, label: c.name, color: '#313131' }));
 
 const dot = (color = '#ccc') => ({
   alignItems: 'center',
@@ -40,38 +45,6 @@ const dot = (color = '#ccc') => ({
 });
 
 const customStyles = {
-  // control: (base, state) => ({
-  //   ...base,
-  //   // background: '#023950',
-  //   // match with the menu
-  //   borderRadius: 5,
-  //   // Overwrittes the different states of border
-  //   // borderColor: state.isFocused ? 'yellow' : 'green',
-  //   // Removes weird border around container
-  //   // boxShadow: state.isFocused ? null : null,
-  //   '&:focus': {
-  //     // Overwrittes the different states of border
-  //     border: 'none',
-  //   },
-  //   width: '10rem',
-  //   height: '2rem',
-  // }),
-  // menu: (base) => ({
-  //   ...base,
-  //   // override border radius to match the box
-  //   borderRadius: 0,
-  //   // kill the gap
-  //   marginTop: 0,
-  //   // backgroundColor: 'red',
-  // }),
-  // menuList: (base) => ({
-  //   ...base,
-  //   // kill the white space on first and last option
-  //   padding: 0,
-  // }),
-  // input: (styles) => ({ ...styles, ...dot() }),
-  // placeholder: (styles) => ({ ...styles, ...dot() }),
-  // singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
   control: (styles) => ({
     ...styles,
     backgroundColor: 'white',
@@ -107,14 +80,8 @@ const customStyles = {
       },
     };
   },
-  input: (styles) => ({
-    ...styles,
-    // marginBottom: 15,
-    // paddingTop: 15,
-  }),
   placeholder: (styles) => ({
     ...styles,
-    // marginBottom: 15,
     paddingBottom: 5,
   }),
   singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
@@ -122,32 +89,49 @@ const customStyles = {
   indicatorSeparator: (styles) => ({ ...styles, display: 'none' }),
 };
 
-const Reminders = ({ events }) => {
+const Reminders = ({ day }) => {
+  const [, calendarActions] = useContext(CalendarContext);
   const { inputs, handleInputChange, setInitialState } = useReminderForm();
   const [showForm, setshowForm] = useState(false);
 
   useEffect(() => {
-    console.log('inputs', inputs);
+    // console.log('inputs', inputs);
   }, [inputs]);
 
-  const addNote = () => {
+  const addReminder = () => {
     setshowForm(true);
   };
-  const discardNote = () => {
+  const discardReminder = () => {
     console.log('Discard');
     setshowForm(false);
     setInitialState();
   };
 
-  const submitNote = () => {
-    console.log(`Note: ${inputs.note} City: ${inputs.city}`);
+  const submitReminder = () => {
+    const {
+      time, note, city, label,
+    } = inputs;
+
+    const reminder = {
+      startDate: moment(time).toDate(),
+      endDate: moment(time)
+        .add(1, 'hours')
+        .toDate(),
+      note,
+      city,
+      label,
+    };
+
+    console.log('reminder:', reminder);
+
+    calendarActions.addEvent(reminder);
   };
 
   const handleSubmit = (event) => {
     if (event) {
       event.preventDefault();
     }
-    submitNote();
+    submitReminder();
   };
 
   const proccessDropdownEvent = (event, key) => {
@@ -156,24 +140,19 @@ const Reminders = ({ events }) => {
       name: key,
     };
 
-    console.log('parsedEvent', parsedEvent);
-
     handleInputChange(parsedEvent);
   };
 
   const proccessTimePickerEvent = (event) => {
-    console.log('event', event);
     // eslint-disable-next-line no-underscore-dangle
     const time = event ? event._d : new Date();
-
-    // if (!event) time =
-
-    console.log('time', time);
-
+    const date = moment(
+      `${moment(day.date).format('YYYY-MM-DD')} ${moment(time).format('LTS')}`,
+    ).format();
     const parsedEvent = {
       ...event,
       name: 'time',
-      value: time,
+      value: date,
     };
 
     handleInputChange(parsedEvent);
@@ -182,7 +161,7 @@ const Reminders = ({ events }) => {
   return (
     <div className={styles.Reminders}>
       <div className={styles.Reminders__actions}>
-        <ActionButton onClick={addNote}>
+        <ActionButton onClick={addReminder}>
           <Add />
         </ActionButton>
         <ActionButton>
@@ -195,10 +174,11 @@ const Reminders = ({ events }) => {
             className={styles.Reminders__form___note}
             type="text"
             name="note"
-            placeholder="Write your reminder here..."
+            placeholder="Write a reminder..."
             onChange={handleInputChange}
             value={inputs.note}
             required
+            maxLength="30"
           />
           <div className={styles.Reminders__form___items}>
             <TimePicker
@@ -211,7 +191,7 @@ const Reminders = ({ events }) => {
             <Select
               value={inputs.city}
               onChange={(e) => proccessDropdownEvent(e, 'city')}
-              options={options}
+              options={computedCitiesOptions}
               placeholder="select city"
               styles={customStyles}
               isSearchable
@@ -219,20 +199,24 @@ const Reminders = ({ events }) => {
             <Select
               value={inputs.label}
               onChange={(e) => proccessDropdownEvent(e, 'label')}
-              options={options}
+              options={colorOptions}
               placeholder="select label"
               styles={customStyles}
               isSearchable
             />
           </div>
-          <button type="submit">Add</button>
-          <button type="button" onClick={discardNote}>
-            Discard
-          </button>
+          <div className={styles.Reminders__form__actions}>
+            <button type="submit" className={styles.Reminders__action}>
+              Post
+            </button>
+            <button type="button" className={styles.Reminders__action} onClick={discardReminder}>
+              Discard
+            </button>
+          </div>
         </form>
       )}
       <ul className={styles.Reminders__list}>
-        {events.map((e) => (
+        {day.events.map((e) => (
           <EventReminderItem event={e} key={e.id} />
         ))}
       </ul>
@@ -241,7 +225,7 @@ const Reminders = ({ events }) => {
 };
 
 Reminders.propTypes = {
-  events: PropTypes.array,
+  day: PropTypes.object,
 };
 
 export default Reminders;

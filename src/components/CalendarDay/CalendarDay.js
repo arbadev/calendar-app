@@ -52,48 +52,48 @@ const CalendarDay = ({ day }) => {
     setOpen(false);
   };
 
-  const events = [
-    {
-      id: 2,
-      startDate: '2019-11-03T04:20:07.520Z',
-      endDate: '2019-11-03T04:20:07.520Z',
-      note: 'string string string string string string string',
-      city: 'Caracas',
-      forecast: '#63cdda',
-      label: '#63cdda',
-      isMultiDayEvent: false,
-    },
-    {
-      id: 3,
-      startDate: '2019-11-03T07:20:07.520Z',
-      endDate: '2019-11-03T07:20:07.520Z',
-      note: 'string string string string',
-      city: 'Bogota',
-      forecast: '#f7d794',
-      label: '#f7d794',
-      isMultiDayEvent: false,
-    },
-    {
-      id: 4,
-      startDate: '2019-11-03T07:20:07.520Z',
-      endDate: '2019-11-03T07:20:07.520Z',
-      note: 'string string string string',
-      city: 'Medellin',
-      forecast: '#778beb',
-      label: '#778beb',
-      isMultiDayEvent: false,
-    },
-    {
-      id: 5,
-      startDate: '2019-11-03T07:20:07.520Z',
-      endDate: '2019-11-03T07:20:07.520Z',
-      note: 'AaAaAaAaAaAaAaAaAaAaAaAaAaAaAa',
-      city: 'Buenos Aires',
-      forecast: '#e77f67',
-      label: '#e77f67',
-      isMultiDayEvent: false,
-    },
-  ];
+  // const events = [
+  //   {
+  //     id: 2,
+  //     startDate: '2019-11-03T04:20:07.520Z',
+  //     endDate: '2019-11-03T04:20:07.520Z',
+  //     note: 'string string string string string string string',
+  //     city: 'Caracas',
+  //     forecast: '#63cdda',
+  //     label: '#63cdda',
+  //     isMultiDayEvent: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     startDate: '2019-11-03T07:20:07.520Z',
+  //     endDate: '2019-11-03T07:20:07.520Z',
+  //     note: 'string string string string',
+  //     city: 'Bogota',
+  //     forecast: '#f7d794',
+  //     label: '#f7d794',
+  //     isMultiDayEvent: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     startDate: '2019-11-03T07:20:07.520Z',
+  //     endDate: '2019-11-03T07:20:07.520Z',
+  //     note: 'string string string string',
+  //     city: 'Medellin',
+  //     forecast: '#778beb',
+  //     label: '#778beb',
+  //     isMultiDayEvent: false,
+  //   },
+  //   {
+  //     id: 5,
+  //     startDate: '2019-11-03T07:20:07.520Z',
+  //     endDate: '2019-11-03T07:20:07.520Z',
+  //     note: 'AaAaAaAaAaAaAaAaAaAaAaAaAaAaAa',
+  //     city: 'Buenos Aires',
+  //     forecast: '#e77f67',
+  //     label: '#e77f67',
+  //     isMultiDayEvent: false,
+  //   },
+  // ];
 
   const boxClass = classNames(styles.calendarDay, { [styles.calendarDayWeekend]: isWeekend });
   const dayClass = classNames(
@@ -111,21 +111,25 @@ const CalendarDay = ({ day }) => {
         <p className={dayClass}>{dayOfMonth}</p>
       </div>
       <div className={styles.calendarDay__events}>
-        {events.map((e, i) => {
+        {day.events.map((e, i) => {
           if (i < RENDER_ROWS) {
             return <EventItem event={e} key={e.id} />;
           }
           return <></>;
         })}
-        <p className={styles.calendarDay__extras}>
-          {events.length - 2}
-          {' '}
+        {day.events.length > 2 ? (
+          <p className={styles.calendarDay__extras}>
+            {day.events.length - 2}
+            {' '}
 more ...
-        </p>
+          </p>
+        ) : (
+          <div />
+        )}
       </div>
 
       <Modal isOpen={open} onRequestClose={closeModal} style={BASE_MODAL_STYLES}>
-        <Reminders events={events} />
+        <Reminders day={day} />
       </Modal>
     </div>
   );

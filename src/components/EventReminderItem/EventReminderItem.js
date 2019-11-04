@@ -26,8 +26,8 @@ const EventReminderItem = ({ event }) => {
       </div>
       <div className={styles.eventReminderItem__infoWrapper}>
         <p className={styles.eventReminderItem__note}>{moment(event.startDate).calendar()}</p>
-        <p className={styles.eventReminderItem__note}>{event.city}</p>
-        <NoteLabel color={event.label} styles={{ height: '1rem', width: '1rem' }} />
+        <p className={styles.eventReminderItem__note}>{event.city.value.name}</p>
+        <NoteLabel color={event.label.color} styles={{ height: '1rem', width: '1rem' }} />
       </div>
 
       <div className={styles.eventReminderItem__actions}>

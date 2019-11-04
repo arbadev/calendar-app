@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 
 const INITIAL_STATE = {
@@ -12,8 +13,6 @@ const useForm = () => {
 
   const handleInputChange = (event) => {
     if (event && event.persist) event.persist();
-
-    console.log('event', event);
 
     const key = event.name || event.target.name;
     const value = event && event.event && Array.isArray(event.event)

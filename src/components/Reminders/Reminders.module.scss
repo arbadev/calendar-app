@@ -44,6 +44,16 @@
             width: 100%;
             margin-bottom: 1rem;
         }
+
+        &__actions {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 1rem 0;
+            border-bottom: 1px solid $font-color-gray-palette;
+        }
     }
 
     &__actions {
@@ -61,6 +71,35 @@
         width: 100%;
         height: 30rem;
         overflow-y: scroll;
+    }
+
+    &__action {
+        height: 3rem;
+        width: 9rem;
+        background-color: transparent;
+        border: 3px solid $alter-grey;
+        border-radius: 3px;
+        color: $alter-grey;
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &:active {
+            transform: translateY(-0.1rem);
+        }
+
+        &:focus {
+            outline: 0;
+        }
+
+        &:hover {
+            border: 3px solid $red-grey-base;
+            color: $red-grey-base;
+        }
+
+        &:not(:first-child) {
+            margin-left: 3rem;
+        }
     }
 }
 

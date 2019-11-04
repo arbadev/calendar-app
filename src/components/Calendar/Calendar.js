@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-
 import TokenGenerator from 'uuid-token-generator';
 
 import { CalendarContext } from '../../Providers/CalendarContext';

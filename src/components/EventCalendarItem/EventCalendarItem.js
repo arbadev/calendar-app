@@ -6,7 +6,7 @@ import styles from './EventCalendarItem.module.scss';
 
 const EventCalendarItem = ({ event }) => (
   <div className={styles.EventCalendarItem}>
-    <NoteLabel color={event.label} styles={{ margin: '0 0 -0.3rem 0.75rem' }} />
+    <NoteLabel color={event.label.color} styles={{ margin: '0 0 -0.3rem 0.75rem' }} />
     <p className={styles.EventCalendarItem__note}>{event.note}</p>
   </div>
 );

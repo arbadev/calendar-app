@@ -1,3 +1,79 @@
 @import "styles/colors";
 
-.CalendarDay {}
+.calendarDay {
+    box-sizing: border-box;
+    border-top: 1px solid rgba($font-color-gray-palette, 0.2);
+    border-left: 1px solid rgba($font-color-gray-palette, 0.2);
+    border-bottom: 1px solid rgba($font-color-gray-palette, 0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+
+    &:hover {
+        transform: scale(1.075);
+        border: none;
+        background-color: $blue-grey;
+        border-radius: 5px;
+        color: $font-color-gray-palette;
+    }
+
+    &Weekend {
+        background-color: rgba($blue-grey, 0.5);
+    }
+
+    &__dayContent {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__day {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 2rem;
+        font-weight: 500;
+
+        // text-align: right;
+        color: $font-color-gray-palette;
+        margin: 0.3rem 0;
+        padding: 0;
+        margin-right: 1rem;
+        align-self: flex-end;
+
+        &Today {
+            border-radius: 50%;
+            background-color: $red-grey-base;
+            color: $grey-dark-2;
+            font-weight: 600;
+            margin-right: 0.8rem;
+            font-size: 1.8rem;
+            margin-top: 0.9;
+        }
+
+        &AnotherMonth {
+            color: #616161;
+        }
+    }
+
+    &__events {
+        height: 6rem;
+    }
+
+    &__extras {
+        font-size: 1.1rem;
+        margin-left: 1.75rem;
+        color: #a3a1a1;
+        max-width: 10rem;
+        overflow: hidden;
+        white-space: nowrap; /* Don't forget this one */
+        text-overflow: ellipsis;
+        text-align: left;
+        font-weight: 600;
+    }
+}

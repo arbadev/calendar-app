@@ -4,11 +4,12 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 0.1rem;
+
+    // margin-bottom: 0.1rem;
 
     &__label {
-        height: 0.75rem;
-        width: 0.75rem;
+        height: 0.50rem;
+        width: 0.50rem;
         background-color: #bbb;
         border-radius: 50%;
         display: inline-block;
@@ -16,7 +17,7 @@
     }
 
     &__note {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         margin-left: .5rem;
         color: $font-color-gray-palette;
         max-width: 12rem;

@@ -10,6 +10,7 @@
     border-radius: 1rem;
     box-shadow: $regular-box-shadow;
     border: -3px solid $grey-dark-1;
+    overflow: hidden;
 }
 
 .header {
@@ -69,7 +70,7 @@
 .actionButton {
     height: 3rem;
     width: 3rem;
-    background-color: $grey-light-1;
+    background-color: transparent;
     border: none;
     border-radius: 10px;
 

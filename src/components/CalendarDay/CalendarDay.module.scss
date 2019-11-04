@@ -13,28 +13,67 @@
     &:hover {
         transform: scale(1.075);
         border: none;
-        background-color: $grey-light-1;
+        background-color: $blue-grey;
         border-radius: 5px;
+        color: $font-color-gray-palette;
+    }
+
+    &Weekend {
+        background-color: rgba($blue-grey, 0.5);
+    }
+
+    &__dayContent {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        margin: 0;
+        padding: 0;
     }
 
     &__day {
-        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
         font-size: 2rem;
         font-weight: 500;
-        text-align: right;
+
+        // text-align: right;
         color: $font-color-gray-palette;
-
-        // background-color: red;
-        margin: 0 0 0.5rem 0;
+        margin: 0.3rem 0;
         padding: 0;
-        height: 3rem;
-        margin-right: 1.5rem;
+        margin-right: 1rem;
+        align-self: flex-end;
 
-        // displ
-   
+        &Today {
+            border-radius: 50%;
+            background-color: $red-grey-base;
+            color: $grey-dark-2;
+            font-weight: 600;
+            margin-right: 0.8rem;
+            font-size: 1.8rem;
+            margin-top: 0.9;
+        }
+
+        &AnotherMonth {
+            color: #616161;
+        }
     }
 
     &__events {
-        height: 5rem;
+        height: 6rem;
+    }
+
+    &__extras {
+        font-size: 1.1rem;
+        margin-left: 1.75rem;
+        color: #a3a1a1;
+        max-width: 10rem;
+        overflow: hidden;
+        white-space: nowrap; /* Don't forget this one */
+        text-overflow: ellipsis;
+        text-align: left;
+        font-weight: 600;
     }
 }

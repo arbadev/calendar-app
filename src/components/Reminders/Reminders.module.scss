@@ -6,9 +6,45 @@
     justify-content: flex-start;
     align-items: center;
     width: 40rem;
-    height: 50rem;
+
+    // height: 50rem;
     background-color: #2f3640;
     background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
+    overflow: hidden;
+
+    &__form {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding: 1rem;
+        border-bottom: 1px solid $font-color-gray-palette;
+
+        &___note {
+            width: 100%;
+            border-radius: 5px;
+            background-color: transparent;
+            border: 1px solid $font-color-gray-palette;
+            padding: 0.75rem;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: $font-color-gray-palette;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        &___items {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+    }
 
     &__actions {
         display: flex;
@@ -23,5 +59,31 @@
     &__list {
         list-style-type: none;
         width: 100%;
+        height: 30rem;
+        overflow-y: scroll;
+    }
+}
+
+.dropdown {
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid $font-color-gray-palette;
+    font-size: 1rem;
+    color: $font-color-gray-palette;
+    width: 30%;
+
+    &__control {
+        background-color: red;
+    }
+
+    &__menu {
+        background-color: red;
+        border: 1px solid green;
+    }
+
+    &__placeholder {
+        color: $grey-dark-1;
+        font-size: 0.75rem;
+        font-weight: 600;
     }
 }

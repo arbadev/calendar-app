@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Modal from 'react-modal';
@@ -31,7 +31,7 @@ const BASE_MODAL_STYLES = {
   },
   overlay: {
     zIndex: 10,
-    background: 'rgba(50, 50, 50, 0.5)',
+    background: 'rgba(15, 15, 15, 0.75)',
   },
 };
 

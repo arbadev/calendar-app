@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Dropdown from 'react-dropdown';
 
 import useReminderForm from '../../hooks/useReminderForm';
 import EventReminderItem from '../EventReminderItem';
@@ -8,6 +9,15 @@ import { ReactComponent as Add } from '../../assets/img/add.svg';
 import { ReactComponent as DeleteAll } from '../../assets/img/delete_all.svg';
 
 import styles from './Reminders.module.scss';
+import 'react-dropdown/style.css';
+
+const options = [
+  { value: 'one', label: 'One', name: 'city' },
+  { value: 'two', label: 'Two', className: 'myOptionClassName' },
+  { value: 'three', label: 'Three', className: 'myOptionClassName' },
+];
+
+const defaultOption = options[0];
 
 const Reminders = ({ events }) => {
   const { inputs, handleInputChange, setInitialState } = useReminderForm();
@@ -37,6 +47,14 @@ const Reminders = ({ events }) => {
     submitNote();
   };
 
+  const proccessDropdownEvent = (event, key) => {
+    const parsedEvent = {
+      ...event,
+      name: key,
+    };
+    handleInputChange(parsedEvent);
+  };
+
   return (
     <div className={styles.Reminders}>
       <div className={styles.Reminders__actions}>
@@ -49,31 +67,46 @@ const Reminders = ({ events }) => {
       </div>
       {showForm && (
         <form className={styles.Reminders__form} onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="text"
-              name="note"
-              onChange={handleInputChange}
-              value={inputs.note}
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              name="city"
-              onChange={handleInputChange}
+          <input
+            className={styles.Reminders__form___note}
+            type="text"
+            name="note"
+            placeholder="Write your reminder here..."
+            onChange={handleInputChange}
+            value={inputs.note}
+            required
+          />
+          <div className={styles.Reminders__form___items}>
+            <Dropdown
+              className={styles.dropdown}
+              menuClassName={styles.dropdown__menu}
+              placeholderClassName={styles.dropdown__placeholder}
+              controlClassName={styles.dropdown__control}
+              options={options}
+              onChange={(e) => proccessDropdownEvent(e, 'city')}
               value={inputs.city}
-              required
+              placeholder="select city"
             />
-          </div>
-          <div>
-            <input
-              type="text"
-              name="label"
-              onChange={handleInputChange}
+            <Dropdown
+              className={styles.dropdown}
+              menuClassName={styles.dropdown__menu}
+              placeholderClassName={styles.dropdown__placeholder}
+              controlClassName={styles.dropdown__control}
+              options={options}
+              onChange={(e) => proccessDropdownEvent(e, 'label')}
               value={inputs.label}
-              required
+              placeholder="select label"
+            />
+            <Dropdown
+              className={styles.dropdown}
+              menuClassName={styles.dropdown__menu}
+              placeholderClassName={styles.dropdown__placeholder}
+              controlClassName={styles.dropdown__control}
+              options={options}
+              name="time"
+              onChange={(e) => proccessDropdownEvent(e, 'time')}
+              value={inputs.time}
+              placeholder="Select time"
             />
           </div>
           <button type="submit">Add</button>

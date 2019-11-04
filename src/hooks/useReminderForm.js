@@ -10,8 +10,14 @@ const useForm = () => {
   const [inputs, setInputs] = useState(INITIAL_STATE);
 
   const handleInputChange = (event) => {
-    event.persist();
-    setInputs((prevInputs) => ({ ...prevInputs, [event.target.name]: event.target.value }));
+    if (event && event.persist) event.persist();
+
+    console.log('event', event);
+
+    const key = event.name || event.target.name;
+    const value = event.value || event.target.value;
+
+    setInputs((prevInputs) => ({ ...prevInputs, [key]: value }));
   };
 
   const setInitialState = () => setInputs(INITIAL_STATE);

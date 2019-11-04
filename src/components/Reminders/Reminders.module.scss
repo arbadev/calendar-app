@@ -5,7 +5,7 @@
     flex-flow: column wrap;
     justify-content: flex-start;
     align-items: center;
-    width: 30rem;
+    width: 40rem;
     height: 50rem;
     background-color: #2f3640;
     background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
@@ -17,5 +17,11 @@
         align-items: center;
         width: 100%;
         padding: 1rem 0;
+        border-bottom: 1px solid $font-color-gray-palette;
+    }
+
+    &__list {
+        list-style-type: none;
+        width: 100%;
     }
 }

@@ -11,15 +11,11 @@ import styles from './EventReminderItem.module.scss';
 const EventReminderItem = ({ event }) => {
   const [isHovering, setIsHovering] = useState(false);
 
-  const handleMouseHover = () => {
-    setIsHovering(!isHovering);
-  };
-
   return (
     <li
       className={styles.eventReminderItem}
-      onMouseEnter={handleMouseHover}
-      onMouseLeave={handleMouseHover}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
       <div className={styles.eventReminderItem__noteWrapper}>
         <NoteLabel

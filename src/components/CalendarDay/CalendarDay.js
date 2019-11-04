@@ -43,20 +43,12 @@ const CalendarDay = ({ day }) => {
   } = day;
 
   const [open, setOpen] = useState(false);
-  // useEffect(() => {
-  // });
-
-  useEffect(() => {
-    console.log(open);
-  }, [open]);
 
   const openModal = () => {
     setOpen(true);
   };
 
   const closeModal = () => {
-    console.log('HEETRETET');
-
     setOpen(false);
   };
 

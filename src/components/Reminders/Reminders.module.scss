@@ -10,5 +10,12 @@
     background-color: #2f3640;
     background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
 
-    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    &__actions {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding: 1rem 0;
+    }
 }

@@ -7,6 +7,7 @@ import { ReactComponent as RightChevron } from '../../assets/img/keyboard_arrow_
 import { ReactComponent as LeftChevron } from '../../assets/img/keyboard_arrow_left.svg';
 import { ReactComponent as Crop } from '../../assets/img/crop.svg';
 import CalendarDay from '../CalendarDay';
+import ActionButton from '../../Atoms/ActionButton';
 
 import styles from './Calendar.module.scss';
 
@@ -33,27 +34,15 @@ const Calendar = () => {
       <div className={styles.header}>
         <>{getMonthYearLabel(calendarState)}</>
         <div className={styles.header__calendarActions}>
-          <button
-            type="button"
-            className={styles.actionButton}
-            onClick={() => calendarActions.getPrevMonth()}
-          >
+          <ActionButton onClick={() => calendarActions.getPrevMonth()}>
             <LeftChevron />
-          </button>
-          <button
-            type="button"
-            className={styles.actionButton}
-            onClick={() => calendarActions.setDate(new Date())}
-          >
+          </ActionButton>
+          <ActionButton onClick={() => calendarActions.setDate(new Date())}>
             <Crop />
-          </button>
-          <button
-            type="button"
-            className={styles.actionButton}
-            onClick={() => calendarActions.getNextMonth()}
-          >
+          </ActionButton>
+          <ActionButton onClick={() => calendarActions.getNextMonth()}>
             <RightChevron />
-          </button>
+          </ActionButton>
         </div>
       </div>
       <div className={styles.week}>

@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import useReminderForm from '../../hooks/useReminderForm';
+import EventReminderItem from '../EventReminderItem';
+import ActionButton from '../../Atoms/ActionButton';
+import { ReactComponent as Add } from '../../assets/img/add.svg';
+import { ReactComponent as DeleteAll } from '../../assets/img/delete_all.svg';
 
 import styles from './Reminders.module.scss';
 
@@ -36,10 +40,12 @@ const Reminders = ({ events }) => {
   return (
     <div className={styles.Reminders}>
       <div className={styles.Reminders__actions}>
-        <button type="button" onClick={addNote}>
-          Add
-        </button>
-        <button type="button"> Delete All </button>
+        <ActionButton onClick={addNote}>
+          <Add />
+        </ActionButton>
+        <ActionButton>
+          <DeleteAll />
+        </ActionButton>
       </div>
       {showForm && (
         <form className={styles.Reminders__form} onSubmit={handleSubmit}>
@@ -78,7 +84,7 @@ const Reminders = ({ events }) => {
       )}
       <ul className={styles.Reminders__list}>
         {events.map((e) => (
-          <li>{`${e.label} --- ${e.note}`}</li>
+          <EventReminderItem event={e} key={e.id} />
         ))}
       </ul>
     </div>

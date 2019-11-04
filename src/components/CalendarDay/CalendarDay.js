@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Modal from 'react-modal';
 
+import ActionButton from '../../Atoms/ActionButton';
 import { ReactComponent as Today } from '../../assets/img/today.svg';
 
 import EventItem from '../EventCalendarItem';
@@ -25,6 +26,8 @@ const BASE_MODAL_STYLES = {
     display: 'flex',
     flexFlow: 'column wrap',
     border: 'none',
+    borderRadius: '10px',
+    overflow: 'hidden',
   },
   overlay: {
     zIndex: 10,
@@ -102,9 +105,9 @@ const CalendarDay = ({ day }) => {
   return (
     <div className={boxClass}>
       <div className={styles.calendarDay__dayContent}>
-        <button type="button" className={styles.actionButton} onClick={openModal}>
+        <ActionButton onClick={openModal}>
           <Today />
-        </button>
+        </ActionButton>
         <p className={dayClass}>{dayOfMonth}</p>
       </div>
       <div className={styles.calendarDay__events}>

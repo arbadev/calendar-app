@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-shadow */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import chroma from 'chroma-js';
@@ -87,15 +87,11 @@ const customStyles = {
 };
 
 const Reminders = ({ day }) => {
-  const { addReminder: addReminderContext } = useContext(CalendarContext);
+  const { addReminder: addReminderContext, deleteReminder } = useContext(CalendarContext);
   const {
     inputs, handleInputChange, setInitialState, setState,
   } = useReminderForm();
   const [showForm, setshowForm] = useState(false);
-
-  useEffect(() => {
-    // console.log('inputs', inputs);
-  }, [inputs]);
 
   const addReminder = () => {
     setshowForm(true);
@@ -135,14 +131,12 @@ const Reminders = ({ day }) => {
   };
 
   const handleEdit = (event, e) => {
-    console.log('Edit event', event);
-    console.log('Edit e', e);
     setState(event);
     setshowForm(true);
   };
 
   const handleDelete = (event) => {
-    console.log('Delete', event);
+    deleteReminder(event);
   };
 
   const proccessDropdownEvent = (event, key) => {

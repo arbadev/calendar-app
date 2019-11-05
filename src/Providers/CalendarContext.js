@@ -87,6 +87,14 @@ const CalendarProvider = ({ children }) => {
     console.log('day key', dayKey);
   };
 
+  const deleteReminder = (reminder) => {
+    console.log('deleteReminder', reminder);
+    const { startDate } = reminder;
+    const dayKey = moment(startDate).format('L');
+
+    dispatch({ type: 'remove', payload: { ...reminder, dayKey } });
+  };
+
   const calendarWithEvents = calendarState.weeks.map((week) => week.map((day) => {
     const dayKey = moment(day.date).format('L');
     return {
@@ -103,6 +111,7 @@ const CalendarProvider = ({ children }) => {
         calendarState,
         calendarActions,
         addReminder,
+        deleteReminder,
         calendarWithEvents,
       }}
     >

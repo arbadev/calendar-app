@@ -47,6 +47,13 @@ const CalendarProvider = ({ children }) => {
           [dayKey]: value,
         };
       }
+      case 'remove_all': {
+        const { dayKey } = action.payload;
+        return {
+          ...events,
+          [dayKey]: [],
+        };
+      }
       case 'set_state': {
         return action.payload;
       }
@@ -82,6 +89,12 @@ const CalendarProvider = ({ children }) => {
     dispatch({ type: 'remove', payload: { ...reminder, dayKey } });
   };
 
+  const deleteAll = (date) => {
+    const dayKey = moment(date).format('L');
+
+    dispatch({ type: 'remove_all', payload: { dayKey } });
+  };
+
   const calendarWithEvents = calendarState.weeks.map((week) => week.map((day) => {
     const dayKey = moment(day.date).format('L');
     return {
@@ -97,6 +110,7 @@ const CalendarProvider = ({ children }) => {
         calendarActions,
         addReminder,
         deleteReminder,
+        deleteAll,
         calendarWithEvents,
       }}
     >

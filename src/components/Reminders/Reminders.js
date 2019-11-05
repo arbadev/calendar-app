@@ -87,7 +87,9 @@ const customStyles = {
 };
 
 const Reminders = ({ day }) => {
-  const { addReminder: addReminderContext, deleteReminder } = useContext(CalendarContext);
+  const { addReminder: addReminderContext, deleteReminder, deleteAll } = useContext(
+    CalendarContext,
+  );
   const {
     inputs, handleInputChange, setInitialState, setFormState,
   } = useReminderForm();
@@ -139,6 +141,10 @@ const Reminders = ({ day }) => {
     deleteReminder(event);
   };
 
+  const hanldeDeleteAll = () => {
+    deleteAll(day.date);
+  };
+
   const proccessDropdownEvent = (event, key) => {
     const parsedEvent = {
       event: [event],
@@ -173,7 +179,7 @@ const Reminders = ({ day }) => {
         <ActionButton onClick={addReminder}>
           <Add />
         </ActionButton>
-        <ActionButton>
+        <ActionButton onClick={hanldeDeleteAll}>
           <DeleteAll />
         </ActionButton>
       </div>

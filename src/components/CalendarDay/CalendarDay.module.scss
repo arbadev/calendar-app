@@ -16,6 +16,10 @@
         background-color: $blue-grey;
         border-radius: 5px;
         color: $font-color-gray-palette;
+
+        & * > button {
+            visibility: visible;
+        }
     }
 
     &Weekend {
@@ -76,5 +80,33 @@
         text-overflow: ellipsis;
         text-align: left;
         font-weight: 600;
+    }
+
+    &__action {
+        height: 3rem;
+        width: 3rem;
+        background-color: transparent;
+        border: none;
+        border-radius: 10px;
+        visibility: hidden;
+
+        &:active {
+            transform: translateY(-0.1rem);
+        }
+
+        &:focus {
+            outline: 0;
+        }
+
+        &:hover svg {
+            fill: $red-grey-base;
+
+            // visibility: visible;
+       
+        }
+    }
+
+    svg {
+        fill: $font-color-gray-palette;
     }
 }

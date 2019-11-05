@@ -8,7 +8,7 @@ import { ReactComponent as Delete } from '../../assets/img/delete.svg';
 import NoteLabel from '../../Atoms/NoteLabel';
 import styles from './EventReminderItem.module.scss';
 
-const EventReminderItem = ({ event }) => {
+const EventReminderItem = ({ event, onEdit, onDelete }) => {
   const [isHovering, setIsHovering] = useState(false);
 
   return (
@@ -19,7 +19,7 @@ const EventReminderItem = ({ event }) => {
     >
       <div className={styles.eventReminderItem__noteWrapper}>
         <NoteLabel
-          color={event.label}
+          color={event.label.color}
           styles={{ height: '1rem', width: '1rem', marginTop: '0.3rem' }}
         />
         <p>{event.note}</p>
@@ -32,13 +32,13 @@ const EventReminderItem = ({ event }) => {
 
       <div className={styles.eventReminderItem__actions}>
         {isHovering && (
-          <ActionButton>
+          <ActionButton onClick={() => onEdit(event)}>
             <Edit />
           </ActionButton>
         )}
 
         {isHovering && (
-          <ActionButton>
+          <ActionButton onClick={() => onDelete(event)}>
             <Delete />
           </ActionButton>
         )}
@@ -49,6 +49,8 @@ const EventReminderItem = ({ event }) => {
 
 EventReminderItem.propTypes = {
   event: PropTypes.object,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default EventReminderItem;

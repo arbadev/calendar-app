@@ -23,11 +23,13 @@ const useForm = () => {
   };
 
   const setInitialState = () => setInputs(INITIAL_STATE);
+  const setState = (state) => setInputs(state);
 
   return {
     handleInputChange,
     inputs,
     setInitialState,
+    setState,
   };
 };
 export default useForm;

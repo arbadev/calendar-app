@@ -7,6 +7,7 @@ import chroma from 'chroma-js';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
+import TokenGenerator from 'uuid-token-generator';
 
 import { CalendarContext } from '../../Providers/CalendarContext';
 import useReminderForm from '../../hooks/useReminderForm';
@@ -18,6 +19,7 @@ import cities from '../../assets/cities.json';
 
 import styles from './Reminders.module.scss';
 
+const tokgen = new TokenGenerator();
 const colorOptions = [
   { label: 'Orange', value: '#f3a683', color: '#f3a683' },
   { label: 'Yellow', value: '#f7d794', color: '#f7d794' },
@@ -26,13 +28,10 @@ const colorOptions = [
   { label: 'Red', value: '#cf6a87', color: '#cf6a87' },
   { label: 'Cyan', value: '#63cdda', color: '#63cdda' },
 ];
-
 const computedCitiesOptions = cities.map((c) => ({ value: c, label: c.name, color: '#313131' }));
-
 const dot = (color = '#ccc') => ({
   alignItems: 'center',
   display: 'flex',
-
   ':before': {
     backgroundColor: color,
     borderRadius: 10,
@@ -43,7 +42,6 @@ const dot = (color = '#ccc') => ({
     width: 10,
   },
 });
-
 const customStyles = {
   control: (styles) => ({
     ...styles,
@@ -73,7 +71,6 @@ const customStyles = {
             : 'black'
           : data.color,
       cursor: isDisabled ? 'not-allowed' : 'default',
-
       ':active': {
         ...styles[':active'],
         backgroundColor: !isDisabled && (isSelected ? data.color : color.alpha(0.3).css()),
@@ -90,8 +87,10 @@ const customStyles = {
 };
 
 const Reminders = ({ day }) => {
-  const [, calendarActions] = useContext(CalendarContext);
-  const { inputs, handleInputChange, setInitialState } = useReminderForm();
+  const { addReminder: addReminderContext } = useContext(CalendarContext);
+  const {
+    inputs, handleInputChange, setInitialState, setState,
+  } = useReminderForm();
   const [showForm, setshowForm] = useState(false);
 
   useEffect(() => {
@@ -102,29 +101,30 @@ const Reminders = ({ day }) => {
     setshowForm(true);
   };
   const discardReminder = () => {
-    console.log('Discard');
     setshowForm(false);
     setInitialState();
   };
 
   const submitReminder = () => {
     const {
-      time, note, city, label,
+      // eslint-disable-next-line no-unused-vars
+      time,
+      note,
+      city,
+      label,
+      __id,
     } = inputs;
 
     const reminder = {
       startDate: moment(time).toDate(),
-      endDate: moment(time)
-        .add(1, 'hours')
-        .toDate(),
+      endDate: moment(time).toDate(),
       note,
       city,
       label,
+      __id: __id || tokgen.generate(),
     };
 
-    console.log('reminder:', reminder);
-
-    calendarActions.addEvent(reminder);
+    addReminderContext(reminder);
   };
 
   const handleSubmit = (event) => {
@@ -132,6 +132,17 @@ const Reminders = ({ day }) => {
       event.preventDefault();
     }
     submitReminder();
+  };
+
+  const handleEdit = (event, e) => {
+    console.log('Edit event', event);
+    console.log('Edit e', e);
+    setState(event);
+    setshowForm(true);
+  };
+
+  const handleDelete = (event) => {
+    console.log('Delete', event);
   };
 
   const proccessDropdownEvent = (event, key) => {
@@ -217,7 +228,13 @@ const Reminders = ({ day }) => {
       )}
       <ul className={styles.Reminders__list}>
         {day.events.map((e) => (
-          <EventReminderItem event={e} key={e.id} />
+          <EventReminderItem
+            event={e}
+            // eslint-disable-next-line no-underscore-dangle
+            key={e.__id || e.id}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
         ))}
       </ul>
     </div>

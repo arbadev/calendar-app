@@ -13,7 +13,7 @@ import styles from './Calendar.module.scss';
 const tokgen = new TokenGenerator();
 
 const Calendar = () => {
-  const [calendarState, calendarActions] = useContext(CalendarContext);
+  const { calendarState, calendarActions, calendarWithEvents } = useContext(CalendarContext);
 
   const getMonthYearLabel = (s) => (
     <div>
@@ -25,8 +25,8 @@ const Calendar = () => {
     </div>
   );
 
-  console.log('STATE', calendarState);
-  console.log('ACTIONS', calendarActions);
+  // console.log('STATE', calendarState);
+  // console.log('ACTIONS', calendarActions);
 
   return (
     <div className={styles.calendar}>
@@ -52,7 +52,7 @@ const Calendar = () => {
         ))}
       </div>
       <div className={styles.days}>
-        {calendarState.weeks.map((week) => week.map((day) => <CalendarDay day={day} key={tokgen.generate()} />))}
+        {calendarWithEvents.map((week) => week.map((day) => <CalendarDay day={day} key={tokgen.generate()} />))}
       </div>
     </div>
   );

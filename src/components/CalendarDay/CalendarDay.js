@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Modal from 'react-modal';
 
 import ActionButton from '../../Atoms/ActionButton';
-import { ReactComponent as Today } from '../../assets/img/today.svg';
+import { ReactComponent as Add } from '../../assets/img/add.svg';
 
 import EventItem from '../EventCalendarItem';
 import Reminders from '../Reminders';
@@ -105,15 +105,16 @@ const CalendarDay = ({ day }) => {
   return (
     <div className={boxClass}>
       <div className={styles.calendarDay__dayContent}>
-        <ActionButton onClick={openModal}>
-          <Today />
+        <ActionButton className={styles.calendarDay__action} onClick={openModal}>
+          <Add />
         </ActionButton>
         <p className={dayClass}>{dayOfMonth}</p>
       </div>
       <div className={styles.calendarDay__events}>
         {day.events.map((e, i) => {
           if (i < RENDER_ROWS) {
-            return <EventItem event={e} key={e.id} />;
+            // eslint-disable-next-line no-underscore-dangle
+            return <EventItem event={e} key={e.__id || e.id} />;
           }
           return <></>;
         })}

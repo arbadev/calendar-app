@@ -7,8 +7,8 @@
     border-bottom: 1px solid rgba($font-color-gray-palette, 0.2);
     transition: all 0.3s ease;
     display: flex;
-    flex-flow: row wrap;
-    align-items: center;
+    flex-flow: column wrap;
+    align-items: flex-start;
 
     &:hover {
         transform: scale(1.075);
@@ -16,6 +16,10 @@
         background-color: $blue-grey;
         border-radius: 5px;
         color: $font-color-gray-palette;
+
+        & * > button {
+            visibility: visible;
+        }
     }
 
     &Weekend {
@@ -24,7 +28,8 @@
 
     &__dayContent {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
         margin: 0;
         padding: 0;
@@ -75,5 +80,33 @@
         text-overflow: ellipsis;
         text-align: left;
         font-weight: 600;
+    }
+
+    &__action {
+        height: 3rem;
+        width: 3rem;
+        background-color: transparent;
+        border: none;
+        border-radius: 10px;
+        visibility: hidden;
+
+        &:active {
+            transform: translateY(-0.1rem);
+        }
+
+        &:focus {
+            outline: 0;
+        }
+
+        &:hover svg {
+            fill: $red-grey-base;
+
+            // visibility: visible;
+       
+        }
+    }
+
+    svg {
+        fill: $font-color-gray-palette;
     }
 }

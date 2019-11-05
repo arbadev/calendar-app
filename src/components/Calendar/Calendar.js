@@ -1,27 +1,19 @@
-import React, { useEffect } from 'react';
-import useCalendar from 'react-use-calendar';
+import React, { useContext } from 'react';
+import TokenGenerator from 'uuid-token-generator';
+
+import { CalendarContext } from '../../Providers/CalendarContext';
 import { ReactComponent as RightChevron } from '../../assets/img/keyboard_arrow_right.svg';
 import { ReactComponent as LeftChevron } from '../../assets/img/keyboard_arrow_left.svg';
-import { ReactComponent as Today } from '../../assets/img/today.svg';
+import { ReactComponent as Crop } from '../../assets/img/crop.svg';
 import CalendarDay from '../CalendarDay';
+import ActionButton from '../../Atoms/ActionButton';
 
 import styles from './Calendar.module.scss';
 
-const Calendar = (props) => {
-  const [state, actions] = useCalendar(null, {
-    events: [
-      {
-        startDate: new Date(2019, 1, 27),
-        endDate: new Date(2019, 1, 27),
-        note: 'Meeting with clients',
-      },
-      {
-        startDate: new Date(2019, 1, 22),
-        endDate: new Date(2019, 1, 25),
-        note: 'Vacation',
-      },
-    ],
-  });
+const tokgen = new TokenGenerator();
+
+const Calendar = () => {
+  const { calendarState, calendarActions, calendarWithEvents } = useContext(CalendarContext);
 
   const getMonthYearLabel = (s) => (
     <div>
@@ -33,55 +25,34 @@ const Calendar = (props) => {
     </div>
   );
 
-  console.log('STATE', state);
-  console.log('ACTIONS', actions);
-
-  useEffect(() => {
-    actions.addEvent({
-      startDate: new Date(),
-      endDate: new Date(),
-      note: 'string string string string',
-      label: '#ca3e47',
-    });
-  }, []);
+  // console.log('STATE', calendarState);
+  // console.log('ACTIONS', calendarActions);
 
   return (
     <div className={styles.calendar}>
       <div className={styles.header}>
-        <>{getMonthYearLabel(state)}</>
-        <div className={styles.header__actions}>
-          <button
-            type="button"
-            className={styles.actionButton}
-            onClick={() => actions.getPrevMonth()}
-          >
+        <>{getMonthYearLabel(calendarState)}</>
+        <div className={styles.header__calendarActions}>
+          <ActionButton onClick={() => calendarActions.getPrevMonth()}>
             <LeftChevron />
-          </button>
-          <button
-            type="button"
-            className={styles.actionButton}
-            onClick={() => actions.setDate(new Date())}
-          >
-            <Today />
-          </button>
-          <button
-            type="button"
-            className={styles.actionButton}
-            onClick={() => actions.getNextMonth()}
-          >
+          </ActionButton>
+          <ActionButton onClick={() => calendarActions.setDate(new Date())}>
+            <Crop />
+          </ActionButton>
+          <ActionButton onClick={() => calendarActions.getNextMonth()}>
             <RightChevron />
-          </button>
+          </ActionButton>
         </div>
       </div>
       <div className={styles.week}>
-        {state.days.map((day) => (
+        {calendarState.days.map((day) => (
           <div className={styles.week__day} key={day}>
             {day}
           </div>
         ))}
       </div>
       <div className={styles.days}>
-        {state.weeks.map((week) => week.map((day) => <CalendarDay day={day} key={day.dayOfYear} />))}
+        {calendarWithEvents.map((week) => week.map((day) => <CalendarDay day={day} key={tokgen.generate()} />))}
       </div>
     </div>
   );

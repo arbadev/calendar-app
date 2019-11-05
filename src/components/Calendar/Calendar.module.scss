@@ -66,27 +66,3 @@
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(7, 1fr);
 }
-
-.actionButton {
-    height: 3rem;
-    width: 3rem;
-    background-color: transparent;
-    border: none;
-    border-radius: 10px;
-
-    &:active {
-        transform: translateY(-0.1rem);
-    }
-
-    &:focus {
-        outline: 0;
-    }
-
-    &:hover svg {
-        fill: $red-grey-base;
-    }
-}
-
-svg {
-    fill: $font-color-gray-palette;
-}

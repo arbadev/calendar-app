@@ -15,7 +15,6 @@ const CalendarProvider = ({ children }) => {
   const reducer = (events, action) => {
     switch (action.type) {
       case 'add': {
-        console.log('add from reducer', action.payload);
         const { dayKey, ...reminder } = action.payload;
         const getReminderValue = (array, r) => {
           // eslint-disable-next-line no-underscore-dangle
@@ -38,7 +37,6 @@ const CalendarProvider = ({ children }) => {
         };
       }
       case 'remove': {
-        console.log('remove from reducer', action.payload);
         const { dayKey, ...reminder } = action.payload;
         const value = events[dayKey] && Array.isArray(events[dayKey])
           ? // eslint-disable-next-line no-underscore-dangle
@@ -62,33 +60,22 @@ const CalendarProvider = ({ children }) => {
   useEffect(() => {
     const data = localStorage.getItem('events');
     if (data) {
-      console.log('if data', data);
-
       dispatch({ type: 'set_state', payload: JSON.parse(data) });
     }
   }, []);
 
   useEffect(() => {
-    console.log('Events cambio', events);
-
     localStorage.setItem('events', JSON.stringify(events));
   }, [events]);
 
-  useEffect(() => {
-    console.log('calendarState', calendarState);
-  }, [calendarState]);
-
   const addReminder = (reminder) => {
-    console.log('addReminder', reminder);
     const { startDate } = reminder;
     const dayKey = moment(startDate).format('L');
 
     dispatch({ type: 'add', payload: { ...reminder, dayKey } });
-    console.log('day key', dayKey);
   };
 
   const deleteReminder = (reminder) => {
-    console.log('deleteReminder', reminder);
     const { startDate } = reminder;
     const dayKey = moment(startDate).format('L');
 
@@ -102,8 +89,6 @@ const CalendarProvider = ({ children }) => {
       events: events[dayKey] && Array.isArray(events[dayKey]) ? events[dayKey] : [],
     };
   }));
-
-  console.table('calendarWithEvents', calendarWithEvents);
 
   return (
     <CalendarContext.Provider

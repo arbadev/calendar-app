@@ -89,7 +89,7 @@ const customStyles = {
 const Reminders = ({ day }) => {
   const { addReminder: addReminderContext, deleteReminder } = useContext(CalendarContext);
   const {
-    inputs, handleInputChange, setInitialState, setState,
+    inputs, handleInputChange, setInitialState, setFormState,
   } = useReminderForm();
   const [showForm, setshowForm] = useState(false);
 
@@ -131,7 +131,7 @@ const Reminders = ({ day }) => {
   };
 
   const handleEdit = (event, e) => {
-    setState(event);
+    setFormState({ ...event, time: event.startDate });
     setshowForm(true);
   };
 
@@ -163,6 +163,10 @@ const Reminders = ({ day }) => {
     handleInputChange(parsedEvent);
   };
 
+  const sortedReminders = day.events
+    .sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
+    .reverse();
+
   return (
     <div className={styles.Reminders}>
       <div className={styles.Reminders__actions}>
@@ -192,6 +196,7 @@ const Reminders = ({ day }) => {
               onChange={proccessTimePickerEvent}
               placeholder="select time"
               // value={inputs.time}
+              // defaultOpenValue={moment(inputs.time)}
             />
             <Select
               value={inputs.city}
@@ -221,7 +226,7 @@ const Reminders = ({ day }) => {
         </form>
       )}
       <ul className={styles.Reminders__list}>
-        {day.events.map((e) => (
+        {sortedReminders.map((e) => (
           <EventReminderItem
             event={e}
             // eslint-disable-next-line no-underscore-dangle

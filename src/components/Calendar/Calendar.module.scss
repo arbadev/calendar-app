@@ -1,0 +1,68 @@
+@import "styles/colors";
+
+.calendar {
+    width: 120rem;
+    display: grid;
+    grid-template-rows: 2fr 1fr repeat(6, 2.5fr);
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-areas: "head head head head head head head" "week week week week week week week" "days days days days days days days" "days days days days days days days" "days days days days days days days" "days days days days days days days" "days days days days days days days" "days days days days days days days";
+    background-color: $grey-dark-2;
+    border-radius: 1rem;
+    box-shadow: $regular-box-shadow;
+    border: -3px solid $grey-dark-1;
+    overflow: hidden;
+}
+
+.header {
+    grid-area: head;
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    &__date {
+        width: 30rem;
+        margin-left: 2rem;
+        font-size: 3.25rem;
+        font-weight: 100;
+
+        & > span {
+            font-size: 3rem;
+            font-weight: 900;
+        }
+    }
+
+    &__actions {
+        margin-right: 2rem;
+        width: 12rem;
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+.week {
+    grid-area: week;
+    color: white;
+    font-size: 2rem;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(7, 1fr);
+
+    // &:not(:first-child) {
+    //     border-left: 1px solid ;
+    //   }
+
+    &__day {
+        text-align: right;
+        margin-right: 1rem;
+    }
+}
+
+.days {
+    grid-area: days;
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
+}

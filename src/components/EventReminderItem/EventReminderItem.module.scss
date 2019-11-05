@@ -1,0 +1,51 @@
+@import "styles/colors";
+
+.eventReminderItem {
+    display: grid;
+    grid-template-rows: repeat(2, 3.5rem);
+    grid-template-columns: 7fr 1fr;
+    grid-template-areas: "note actions " "info actions";
+    width: 100%;
+    color: $font-color-gray-palette;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid rgba($font-color-gray-palette, 0.2);
+    }
+
+    &__noteWrapper {
+        grid-area: note;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        padding: 0.5rem 2rem;
+
+        & > p {
+            margin-left: 0.75rem;
+        }
+    }
+
+    &__infoWrapper {
+        grid-area: info;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0.5rem 2rem;
+    }
+
+    &__actions {
+        grid-area: actions;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: space-around;
+        align-items: center;
+
+        // width: 100%;
+   
+    }
+}

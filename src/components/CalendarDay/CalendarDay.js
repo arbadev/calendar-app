@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Modal from 'react-modal';
 
-import ActionButton from '../../Atoms/ActionButton';
+import ActionButton from '../../atoms/ActionButton';
 import { ReactComponent as Add } from '../../assets/img/add.svg';
 
 import EventItem from '../EventCalendarItem';

@@ -6,7 +6,7 @@ import { ReactComponent as RightChevron } from '../../assets/img/keyboard_arrow_
 import { ReactComponent as LeftChevron } from '../../assets/img/keyboard_arrow_left.svg';
 import { ReactComponent as Crop } from '../../assets/img/crop.svg';
 import CalendarDay from '../CalendarDay';
-import ActionButton from '../../Atoms/ActionButton';
+import ActionButton from '../../atoms/ActionButton';
 
 import styles from './Calendar.module.scss';
 

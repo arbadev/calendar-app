@@ -27,4 +27,4 @@ npm run dev / yarn dev  // url: 'http://localhost:3000/'
 
 ## Live
 
-This repo is currently hosted here: 'https://festive-montalcini-f4db85.netlify.com/' powered by Netlify ^^
+This repo is currently hosted here: 'https://calindr.netlify.com/' powered by Netlify ^^

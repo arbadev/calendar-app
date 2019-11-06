@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-import ActionButton from '../../Atoms/ActionButton';
+import ActionButton from '../../atoms/ActionButton';
 import { ReactComponent as Edit } from '../../assets/img/edit.svg';
 import { ReactComponent as Delete } from '../../assets/img/delete.svg';
-import NoteLabel from '../../Atoms/NoteLabel';
+import NoteLabel from '../../atoms/NoteLabel';
 import styles from './EventReminderItem.module.scss';
 
 const EventReminderItem = ({ event, onEdit, onDelete }) => {
@@ -26,7 +26,9 @@ const EventReminderItem = ({ event, onEdit, onDelete }) => {
       </div>
       <div className={styles.eventReminderItem__infoWrapper}>
         <p className={styles.eventReminderItem__note}>{moment(event.startDate).calendar()}</p>
-        <p className={styles.eventReminderItem__note}>{event.city.value.name}</p>
+        <p className={styles.eventReminderItem__note}>
+          {event.city ? event.city.value.name : 'No city'}
+        </p>
         <NoteLabel color={event.label.color} styles={{ height: '1rem', width: '1rem' }} />
       </div>
 

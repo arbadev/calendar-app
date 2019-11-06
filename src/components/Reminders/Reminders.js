@@ -92,7 +92,7 @@ const Reminders = ({ day }) => {
   );
   const {
     inputs, handleInputChange, setInitialState, setFormState,
-  } = useReminderForm();
+  } = useReminderForm(day);
   const [showForm, setshowForm] = useState(false);
 
   const addReminder = () => {
@@ -156,14 +156,20 @@ const Reminders = ({ day }) => {
 
   const proccessTimePickerEvent = (event) => {
     // eslint-disable-next-line no-underscore-dangle
-    const time = event ? event._d : new Date();
-    const date = moment(
-      `${moment(day.date).format('YYYY-MM-DD')} ${moment(time).format('LTS')}`,
-    ).format();
+
+    console.log('event', event);
+
+    // const time = event ? event._d : new Date();
+
+    // console.log('time', time);
+
+    // const date = moment(
+    //   `${moment(day.date).format('YYYY-MM-DD')} ${moment(time).format('LTS')}`,
+    // ).format();
     const parsedEvent = {
       ...event,
       name: 'time',
-      value: date,
+      value: event,
     };
 
     handleInputChange(parsedEvent);
@@ -197,12 +203,12 @@ const Reminders = ({ day }) => {
           />
           <div className={styles.Reminders__form___items}>
             <TimePicker
-              // clearIcon={null}
               name="time"
               onChange={proccessTimePickerEvent}
               placeholder="select time"
-              // value={inputs.time}
-              // defaultOpenValue={moment(inputs.time)}
+              defaultOpenValue={moment(day.date)}
+              defaultValue={moment(day.date)}
+              allowEmpty={false}
             />
             <Select
               value={inputs.city}

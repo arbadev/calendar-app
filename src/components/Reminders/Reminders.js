@@ -12,7 +12,7 @@ import TokenGenerator from 'uuid-token-generator';
 import { CalendarContext } from '../../Providers/CalendarContext';
 import useReminderForm from '../../hooks/useReminderForm';
 import EventReminderItem from '../EventReminderItem';
-import ActionButton from '../../Atoms/ActionButton';
+import ActionButton from '../../atoms/ActionButton';
 import { ReactComponent as Add } from '../../assets/img/add.svg';
 import { ReactComponent as DeleteAll } from '../../assets/img/delete_all.svg';
 import cities from '../../assets/cities.json';

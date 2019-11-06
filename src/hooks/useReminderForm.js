@@ -1,15 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
+import moment from 'moment';
 
-const INITIAL_STATE = {
+const initialState = (day) => ({
   note: '',
   city: '',
   label: '',
-  time: new Date(),
-};
+  time: moment(day.date),
+});
 
-const useForm = () => {
-  const [inputs, setInputs] = useState(INITIAL_STATE);
+const useForm = (day) => {
+  const [inputs, setInputs] = useState(initialState(day));
 
   const handleInputChange = (event) => {
     if (event && event.persist) event.persist();
@@ -22,7 +23,7 @@ const useForm = () => {
     setInputs((prevInputs) => ({ ...prevInputs, [key]: value }));
   };
 
-  const setInitialState = () => setInputs(INITIAL_STATE);
+  const setInitialState = () => setInputs(initialState(day));
   const setFormState = (state) => setInputs(state);
 
   return {

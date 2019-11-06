@@ -25,9 +25,6 @@ const Calendar = () => {
     </div>
   );
 
-  // console.log('STATE', calendarState);
-  // console.log('ACTIONS', calendarActions);
-
   return (
     <div className={styles.calendar}>
       <div className={styles.header}>

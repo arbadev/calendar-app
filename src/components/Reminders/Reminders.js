@@ -155,17 +155,6 @@ const Reminders = ({ day }) => {
   };
 
   const proccessTimePickerEvent = (event) => {
-    // eslint-disable-next-line no-underscore-dangle
-
-    console.log('event', event);
-
-    // const time = event ? event._d : new Date();
-
-    // console.log('time', time);
-
-    // const date = moment(
-    //   `${moment(day.date).format('YYYY-MM-DD')} ${moment(time).format('LTS')}`,
-    // ).format();
     const parsedEvent = {
       ...event,
       name: 'time',

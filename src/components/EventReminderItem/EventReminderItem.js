@@ -38,12 +38,18 @@ const EventReminderItem = ({ event, onEdit, onDelete }) => {
         <p>{event.note}</p>
       </div>
       <div className={styles.eventReminderItem__infoWrapper}>
-        <p className={styles.eventReminderItem__note}>{moment(event.startDate).calendar()}</p>
+        <p className={styles.eventReminderItem__note}>
+          {moment(event.startDate).calendar()}
+        </p>
         <p className={styles.eventReminderItem__note}>
           {event && event.city ? event.city.value.name : '*'}
         </p>
 
-        <Suspense fallback={<p className={styles.eventReminderItem__note}>fetching...</p>}>
+        <Suspense
+          fallback={
+            <p className={styles.eventReminderItem__note}>fetching...</p>
+          }
+        >
           <ForecastItem forecastResource={fr} />
           {/* <NoteLabel color={event.label.color} styles={{ height: '1rem', width: '1rem' }} /> */}
         </Suspense>
@@ -69,7 +75,7 @@ const EventReminderItem = ({ event, onEdit, onDelete }) => {
 EventReminderItem.propTypes = {
   event: PropTypes.object,
   onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
+  onDelete: PropTypes.func
 };
 
 export default EventReminderItem;

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import { forecastResource } from '../../api/forecastApi';
-import NoteLabel from '../../atoms/NoteLabel';
-import ActionButton from '../../atoms/ActionButton';
-import ForecastItem from '../../atoms/ForecastItem';
+import NoteLabel from '../../Atoms/NoteLabel';
+import ActionButton from '../../Atoms/ActionButton';
+import ForecastItem from '../../Atoms/ForecastItem';
 import { ReactComponent as Edit } from '../../assets/img/edit.svg';
 import { ReactComponent as Delete } from '../../assets/img/delete.svg';
 

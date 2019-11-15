@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import classNames from 'classnames';
-import NoteLabel from '../../atoms/NoteLabel';
+import NoteLabel from '../../Atoms/NoteLabel';
 import styles from './EventCalendarItem.module.scss';
 
 const EventCalendarItem = ({ event }) => (

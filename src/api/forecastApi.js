@@ -1,24 +1,27 @@
 const API_KEY = '994f16e16a8f3af80dc35377e2d0a137';
 
-const fetchForecast = () => fetch(
-  'http://api.openweathermap.org/data/2.5/forecast?id=3797895&APPID=994f16e16a8f3af80dc35377e2d0a137',
-)
-  .then((res) => res.json())
-  .then((res) => res);
+const fetchForecast = cityId =>
+  fetch(
+    `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&APPID=${API_KEY}`
+  )
+    .then(res => res.json())
+    .then(res => {
+      return res;
+    });
 
-const promiseWrapper = (promise) => {
+const promiseWrapper = promise => {
   let status = 'pending';
   let result = null;
 
   const suspender = promise.then(
-    (res) => {
+    res => {
       status = 'success';
       result = res;
     },
-    (err) => {
+    err => {
       status = 'error';
       result = err;
-    },
+    }
   );
 
   return {
@@ -29,11 +32,17 @@ const promiseWrapper = (promise) => {
         throw result;
       }
       return result;
-    },
+    }
   };
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export const forecastResource = () => ({
-  forecast: promiseWrapper(fetchForecast()),
-});
+export const forecastResource = cityId => {
+  const forecastPromise = cityId
+    ? fetchForecast(cityId)
+    : new Promise((resolve, reject) => {
+        resolve();
+      });
+
+  return { forecast: promiseWrapper(forecastPromise) };
+};

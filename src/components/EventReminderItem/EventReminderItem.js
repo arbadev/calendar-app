@@ -11,18 +11,18 @@ import { ReactComponent as Delete } from '../../assets/img/delete.svg';
 
 import styles from './EventReminderItem.module.scss';
 
+const initialForecastResource = forecastResource();
+
+const getTimeStamp = date => Date.parse(date) / 1000;
+
 const EventReminderItem = ({ event, onEdit, onDelete }) => {
   const [isHovering, setIsHovering] = useState(false);
-  let fr;
-  useEffect(() => {
-    console.log('eeey', event);
+  const [resource, setResource] = useState(initialForecastResource);
 
-    fr = forecastResource();
+  useEffect(() => {
+    const cityId = event.city ? event.city.value.id : 0;
+    setResource(forecastResource(cityId));
   }, [event]);
-
-  useEffect(() => {
-    console.log('corri una vez', event);
-  }, []);
 
   return (
     <li
@@ -42,7 +42,7 @@ const EventReminderItem = ({ event, onEdit, onDelete }) => {
           {moment(event.startDate).calendar()}
         </p>
         <p className={styles.eventReminderItem__note}>
-          {event && event.city ? event.city.value.name : '*'}
+          {event && event.city ? event.city.value.name : 'No city'}
         </p>
 
         <Suspense
@@ -50,7 +50,10 @@ const EventReminderItem = ({ event, onEdit, onDelete }) => {
             <p className={styles.eventReminderItem__note}>fetching...</p>
           }
         >
-          <ForecastItem forecastResource={fr} />
+          <ForecastItem
+            forecastResource={resource}
+            timestamp={getTimeStamp(event.startDate)}
+          />
           {/* <NoteLabel color={event.label.color} styles={{ height: '1rem', width: '1rem' }} /> */}
         </Suspense>
       </div>

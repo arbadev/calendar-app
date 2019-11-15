@@ -2,7 +2,7 @@ const API_KEY = '994f16e16a8f3af80dc35377e2d0a137';
 
 const fetchForecast = cityId =>
   fetch(
-    `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&APPID=${API_KEY}`
+    `https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&APPID=${API_KEY}`
   )
     .then(res => res.json())
     .then(res => {

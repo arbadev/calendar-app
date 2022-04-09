@@ -7,7 +7,7 @@
     "calendar": "^0.1.0",
     "chroma-js": "^2.1.0",
     "classnames": "^2.2.6",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "prop-types": "^15.7.2",
     "rc-time-picker": "^3.7.2",
     "react": "^0.0.0-experimental-f6b8d31a7",
